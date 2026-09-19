@@ -35,11 +35,21 @@ from src.logging_config import logger
 state: dict = {"service": None, "error": None}
 
 
+def trim_memory() -> None:
+    """Hand freed memory back to the OS (glibc only). Keeps the app comfortably inside 512 MB hosts."""
+    try:
+        import ctypes
+        ctypes.CDLL("libc.so.6").malloc_trim(0)
+    except Exception:                                 # not Linux/glibc: nothing to do
+        pass
+
+
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     try:
         svc = ForecastService()
         svc.overview()                       # warm the dashboard cache so the first visit is instant
+        trim_memory()
         state["service"] = svc
         logger.info("ForecastIQ model service initialised")
     except Exception as exc:                 # keep the process up so /api/health can explain
@@ -242,6 +252,7 @@ async def api_bulk(file: UploadFile = File(...)):
         raise HTTPException(500, "Bulk forecast failed") from exc
 
     key = bulk_store.put(scored)
+    trim_memory()
     ok = scored["Status"] == "OK"
     good = scored[ok]
     tl = []

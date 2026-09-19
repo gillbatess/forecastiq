@@ -97,5 +97,5 @@ INTERVAL_QUANTILES = (0.10, 0.90)
 
 # Service limits -------------------------------------------------------------
 MAX_HORIZON_WEEKS = 13
-MAX_BULK_ROWS = 250_000
+MAX_BULK_ROWS = 100_000
 MAX_UPLOAD_BYTES = 25 * 1024 * 1024

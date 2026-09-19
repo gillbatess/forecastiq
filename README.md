@@ -24,7 +24,7 @@ and interactive API docs (`/docs`). No database, no external services — it run
 |---|---|
 | **Overview** | Portfolio dashboard: full weekly history, 13-week outlook, back-test vs. actual, top departments and stores. |
 | **Forecast studio** | Store + department + date + horizon (1–13 weeks). Temperature, fuel price, CPI, unemployment, markdowns and holiday flag are **auto-filled for that store and week** and labelled *historical* or *estimated*. Optional "Adjust" panel for what-if overrides. Results: chart with range, weekly table, "what drove it" (per-week feature contributions), economic-context charts. |
-| **Bulk forecast** | Drag-and-drop a CSV (`Store, Dept, Date`; indicators optional), get a scored table with status per row, paging, and CSV download. Up to 250,000 rows / 25 MB. |
+| **Bulk forecast** | Drag-and-drop a CSV (`Store, Dept, Date`; indicators optional), get a scored table with status per row, paging, and CSV download. Up to 100,000 rows / 25 MB per upload. |
 | **Model performance** | Hold-out accuracy, baselines, peak-season back-test, interval calibration, breakdowns — all read from `artifacts/model_metadata.json`. |
 
 ### How the indicator auto-fill works
@@ -63,21 +63,32 @@ Or with Docker: `docker compose up --build` (then http://localhost:7860).
 
 Tests: `pip install -r requirements-dev.txt && pytest -q`
 
-## Deploy free on Hugging Face Spaces
+## Deploy on the web
 
-Hugging Face Spaces runs Docker apps on a free CPU tier (2 vCPU / 16 GB at the time of writing; the Space goes to sleep after a period of inactivity and wakes on the next visit).
-Check the current limits in the Spaces documentation before a client demo.
+The app is one Docker container (`Dockerfile`) that listens on `$PORT` (default 7860) and needs about 300-380 MB of RAM.
 
-1. Create a free account at <https://huggingface.co/join>.
-2. **New → Space.** Name it (e.g. `forecastiq`), choose **Docker → Blank**, hardware **CPU basic (free)**, visibility *Public* (or *Private* to demo from your own login).
-3. Get the code into the Space — either:
-   * **Web upload:** *Files → Add file → Upload files*, drag in the contents of this folder (`Dockerfile`, `README.md`, `requirements.txt`, `backend/`, `src/`, `web/`, `artifacts/`). Skip `data/`, `legacy/`, `notebooks/`, `tests/`.
-   * **Git:** `git clone https://huggingface.co/spaces/<your-username>/forecastiq`, copy the same files in, then `git add . && git commit -m "ForecastIQ" && git push`. When asked for a password use an access token from *Settings → Access Tokens* (write permission).
-4. The Space builds automatically (2–4 minutes). Watch the **Logs** tab; when it says *Running*, the app is live at
-   `https://<your-username>-forecastiq.hf.space`.
-5. For a custom look for clients, embed or link that URL, or attach your own domain later (paid feature). The first request after sleeping takes ~30 s.
+### Render (free web service) - recommended
 
-Notes: every model file in `artifacts/` is under 10 MB (they are gzip-compressed), so no Git-LFS setup is needed. `README.md` must keep its `---` header — Spaces reads `sdk: docker` and `app_port: 7860` from it.
+1. Push this folder to a GitHub repo.
+2. In Render: **New -> Web Service**, connect the repo.
+3. Language **Docker**, instance type **Free**, everything else default, then **Deploy**.
+4. When the build finishes, open the `https://<name>.onrender.com` link. Free services sleep after ~15 minutes idle; the first visit afterwards takes about a minute, so open it before a client demo.
+
+### Hugging Face Spaces (Docker) - requires a paid (PRO) plan
+
+Docker Spaces are no longer available on the free plan (free accounts can only create *Static* Spaces, which cannot run this Python backend).
+With a plan that allows it: create a **Docker -> Blank** Space, create a write token, then
+
+```bash
+pip install -U huggingface_hub
+export HF_TOKEN=hf_xxx HF_SPACE=<username>/<space-name>
+python scripts/deploy_hf.py --dry-run     # optional: list what will be sent
+python scripts/deploy_hf.py
+```
+
+(Plain `git push` to a Space is rejected for binary files unless they use Git-LFS/Xet; the script avoids that.)
+`README.md` must keep its `---` header - Spaces reads `sdk: docker` and `app_port: 7860` from it.
+`docs/github-actions-sync.md` shows how to redeploy automatically from GitHub.
 
 ## Retrain on new data
 
