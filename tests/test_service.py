@@ -84,3 +84,10 @@ def test_backtest_accuracy_is_sane(service):
     assert v["holdout"]["WAPE"] < v["baselines"]["Last week (naive)"]["WAPE"]
     assert 75 <= v["interval"]["calibrated_coverage_pct_out_of_sample"] <= 92
     assert v["holdout"]["R2"] < 0.995        # 0.998 would mean target leakage (the v1 notebook bug)
+
+
+def test_bulk_accepts_lowercase_headers(service):
+    df = pd.DataFrame({"store": [1], "dept": [1], "date": ["2012-08-03"]})
+    out = service.forecast_rows(df)
+    assert list(out.columns[:3]) == ["Store", "Dept", "Date"]
+    assert out.loc[0, "Status"] == "OK"

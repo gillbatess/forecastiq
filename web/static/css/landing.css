@@ -64,6 +64,11 @@ footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wr
   .hero .wrap, .two { grid-template-columns: 1fr; gap: 32px; }
   .feat, .steps { grid-template-columns: 1fr; }
   .nav-top nav { display: none; }
+  .nav-top .wrap { gap: 12px; }
   .acc-bars .b { grid-template-columns: 1fr 60px; } .acc-bars .t { grid-column: 1 / -1; grid-row: 2; }
   section.block { padding: 56px 0; }
+}
+
+@media (max-width: 480px) {
+  .nav-top .btn:not(.btn-primary) { display: none; }
 }

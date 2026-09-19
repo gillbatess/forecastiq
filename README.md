@@ -125,12 +125,14 @@ artifacts/  trained models (gz), reference data, model_metadata.json
 tests/      pytest suite (dates, holidays, leakage, indicators, forecasts, API)
 ```
 
+See [`docs/architecture.md`](docs/architecture.md) for how the pieces fit together (request lifecycle, the two model phases, training vs. serving, deployment shape).
+
 ## Limits worth knowing before a client pitch
 
 * The demo workspace is the public Walmart dataset (2010–2012). A real client needs their own history in the same schema, then a retrain.
 * Forecasts beyond the data are recursive and use estimated indicators; the UI marks them and lowers the confidence label.
 * New store/department combinations with fewer than three weeks of history cannot be forecast (the app says why).
-* Free Spaces have no authentication or persistence; uploaded files live in memory only and are not stored. Add login and a database before real client data goes in.
+* Free hosting tiers (Render, Hugging Face Spaces) have no authentication or persistent storage; uploaded files live in memory only for the life of the process and are not stored. Add login and a database before real client data goes in.
 
 ## Licenses and attributions
 

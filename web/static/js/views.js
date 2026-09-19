@@ -375,7 +375,7 @@
           <label class="drop" id="drop" for="file" tabindex="0">
             <span class="ico">${icon("bulk", 26)}</span>
             <h3 id="drop-t">Drop a CSV here, or click to browse</h3>
-            <p id="drop-s">Up to 250,000 rows &middot; 25 MB</p>
+            <p id="drop-s">Up to 100,000 rows &middot; 25 MB</p>
             <input id="file" type="file" accept=".csv,text/csv" class="sr-only">
           </label>
           <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
@@ -397,7 +397,7 @@
     const setFile = (f) => {
       file = f; $("#b-run").disabled = !f;
       $("#drop-t").textContent = f ? f.name : "Drop a CSV here, or click to browse";
-      $("#drop-s").textContent = f ? `${Math.max(1, Math.round(f.size / 1024))} KB ready to score` : "Up to 250,000 rows · 25 MB";
+      $("#drop-s").textContent = f ? `${Math.max(1, Math.round(f.size / 1024))} KB ready to score` : "Up to 100,000 rows · 25 MB";
     };
     $("#file").addEventListener("change", (e) => setFile(e.target.files[0] || null));
     const drop = $("#drop");

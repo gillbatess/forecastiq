@@ -78,3 +78,9 @@ def test_legacy_endpoints(client):
     csv = b"Store,Dept,Date\n1,1,2012-08-03\n"
     r = client.post("/predict_batch", files={"file": ("a.csv", csv, "text/csv")})
     assert r.status_code == 200 and r.json()[0]["Predicted_Weekly_Sales"] > 0
+
+
+def test_bulk_lowercase_headers_via_api(client):
+    r = client.post("/api/bulk", files={"file": ("x.csv", b"store,dept,date\n1,1,2012-08-03\n", "text/csv")})
+    assert r.status_code == 200, r.text
+    assert r.json()["ok_rows"] == 1
