@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ForecastIQ - Weekly retail demand forecasting</title>
+  <meta name="description" content="ForecastIQ predicts weekly sales for every store and department and fills in the economic context automatically.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/static/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/css/base.css?v=2">
+  <link rel="stylesheet" href="/static/css/landing.css?v=2">
+  <script>try{var t=localStorage.getItem("fiq-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body>
+<header class="nav-top">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18l5-6 4 3 7-9"/><path d="M15 6h5v5"/></svg></span>ForecastIQ</a>
+    <nav aria-label="Sections"><a href="#features">Features</a><a href="#how">How it works</a><a href="#indicators">Indicators</a><a href="#accuracy">Accuracy</a></nav>
+    <span class="sp"></span>
+    <a class="btn btn-sm" href="/docs">API docs</a>
+    <a class="btn btn-sm btn-primary" href="/app">Launch demo</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Weekly demand forecasting for retail</span>
+      <h1>Know next week's demand <em>before the shelves do.</em></h1>
+      <p class="lead">ForecastIQ predicts weekly sales for every store and department, and fills in the economic context automatically, so planners never have to look up fuel prices, CPI or weather again.</p>
+      <div class="cta"><a class="btn btn-primary btn-lg" href="/app#/forecast">Launch the live demo</a><a class="btn btn-lg" href="#how">See how it works</a></div>
+      <p class="fine">Runs on a public retail dataset &middot; no sign-up needed</p>
+    </div>
+    <div class="frame" aria-label="Product preview">
+      <div class="bar"><i></i><i></i><i></i><span>forecastiq / overview</span></div>
+      <div class="body">
+        <div class="mini"><div><b id="h-k1">&ndash;</b><span>Next 13 weeks</span></div><div><b id="h-k2">&ndash;</b><span>Forecast accuracy</span></div><div><b id="h-k3">&ndash;</b><span>Series forecast</span></div></div>
+        <div class="hero-chart"><canvas id="hero-chart" role="img" aria-label="Weekly sales history and forecast"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip"><div class="wrap">
+  <div><b id="s1">421,570</b><span>weekly sales observations</span></div>
+  <div><b id="s2">3,331</b><span>store &times; department series</span></div>
+  <div><b id="s3">45</b><span>stores</span></div>
+  <div><b id="s4">80%</b><span>prediction ranges on every forecast</span></div>
+</div></div>
+
+<section class="block" id="features"><div class="wrap">
+  <h2>Everything a planner needs in one workspace</h2>
+  <p class="sub">From a single department to a quarter-long portfolio view, ForecastIQ turns your sales history into decisions you can act on.</p>
+  <div class="feat">
+    <div class="card"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></div><h3>Automatic economic context</h3><p>Pick a store and a week. Temperature, fuel price, CPI, unemployment, promotions and holiday flags are looked up for you.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-9"/><path d="M3 21h18"/></svg></div><h3>Ranges, not just numbers</h3><p>Every forecast comes with an 80% prediction range that widens honestly as you look further ahead.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h6"/></svg></div><h3>Explainable drivers</h3><p>See which factors pushed a forecast up or down, in dollars, so the number is easy to defend in a planning meeting.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 8l5-5 5 5M4 15v4a2 2 0 002 2h12a2 2 0 002-2v-4"/></svg></div><h3>Bulk forecasting</h3><p>Upload a CSV of stores, departments and weeks. Get back a forecast for every row in seconds, ready to download.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></div><h3>API-first</h3><p>Everything in the app is available through a documented REST API, so forecasts can flow into your own tools.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></svg></div><h3>Honest accuracy</h3><p>We report out-of-sample results only, measured against simple baselines, so you know what to expect.</p></div>
+  </div>
+</div></section>
+
+<section class="block alt" id="how"><div class="wrap">
+  <h2>From sales history to forecast in three steps</h2>
+  <div class="steps">
+    <div class="st"><h3>Connect your sales history</h3><p>Weekly sales by store and department. The demo workspace ships with a public retail dataset.</p></div>
+    <div class="st"><h3>We enrich it automatically</h3><p>Holidays, promotions and local economic conditions are attached to every week, so the model sees the full picture.</p></div>
+    <div class="st"><h3>Forecast any store, any week</h3><p>Get the expected sales, the likely range and the reasons, for one department or thousands at once.</p></div>
+  </div>
+</div></section>
+
+<section class="block" id="indicators"><div class="wrap two">
+  <div>
+    <h2>No more hunting for economic indicators</h2>
+    <p class="sub">Choose a store and a date. ForecastIQ fills in what was happening in that market that week, and marks each value as historical data, an estimate, or your own scenario.</p>
+    <div class="cta"><a class="btn btn-primary" href="/app#/forecast">Try it on a real week</a></div>
+  </div>
+  <div class="ind-demo" aria-label="Example of auto-filled indicators">
+    <div class="r"><span>Temperature</span><span><b>86.1&deg;F</b> <span class="badge good"><span class="dot"></span>Historical data</span></span></div>
+    <div class="r"><span>Fuel price</span><span><b>$3.417</b> <span class="badge good"><span class="dot"></span>Historical data</span></span></div>
+    <div class="r"><span>Consumer price index</span><span><b>221.95</b> <span class="badge good"><span class="dot"></span>Historical data</span></span></div>
+    <div class="r"><span>Unemployment</span><span><b>6.91%</b> <span class="badge good"><span class="dot"></span>Historical data</span></span></div>
+    <p class="hint">Example: Store 1, week ending 3 Aug 2012.</p>
+  </div>
+</div></section>
+
+<section class="block alt" id="accuracy"><div class="wrap two">
+  <div>
+    <h2>Accuracy you can verify</h2>
+    <p class="sub">Every number below comes from weeks the model never saw during training, compared with the simple forecasts a spreadsheet would give you.</p>
+    <div class="cta"><a class="btn" href="/app#/model">See the full model report</a></div>
+  </div>
+  <div class="card"><div class="card-title">Forecast error, Jan &ndash; Oct 2012 hold-out</div><div class="card-sub">WAPE (lower is better)</div>
+    <div class="acc-bars" id="acc-bars" style="margin-top:10px"><div class="skeleton" style="height:120px"></div></div></div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="cta-band"><h2>See your next quarter before it happens</h2><p>Open the live demo and forecast any of 3,331 store-department series.</p><a class="btn btn-lg" href="/app">Launch the demo</a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>&copy; ForecastIQ. Demo workspace built on the public Walmart weekly sales dataset from Kaggle; not affiliated with or endorsed by Walmart.</span><span><a href="/docs">API docs</a> &middot; <a href="/app#/model">Model report</a></span></div></footer>
+
+<script src="/static/vendor/chart.umd.min.js"></script>
+<script src="/static/js/core.js?v=2"></script>
+<script>
+(async function () {
+  const { $, money, int, pctPlain, css, esc } = FIQ;
+  try {
+    const [ov, m] = await Promise.all([FIQ.api("/api/overview"), FIQ.api("/api/model")]);
+    const k = ov.kpis, h = m.validation.holdout, b = m.validation.baselines;
+    $("#h-k1").textContent = money(k.forecast_13w);
+    $("#h-k2").textContent = pctPlain(100 - h.WAPE);
+    $("#h-k3").textContent = int(k.active_series);
+    $("#s1").textContent = int(m.data.rows); $("#s2").textContent = int(m.data.series); $("#s3").textContent = int(m.data.stores);
+    // hero chart: last 60 weeks + forecast
+    const hist = ov.history.slice(-60), fc = ov.forecast;
+    const labels = [...hist.map(r => r.date), ...fc.map(r => r.date)];
+    const a = labels.map(() => null), f = labels.map(() => null);
+    hist.forEach((r, i) => a[i] = r.actual);
+    fc.forEach((r, i) => f[hist.length + i] = r.forecast);
+    f[hist.length - 1] = a[hist.length - 1];
+    FIQ.lineChart($("#hero-chart"), { labels, xFmt: FIQ.dMon, maxTicks: 6, beginAtZero: false,
+      marker: { index: hist.length, label: "Forecast" },
+      tooltipFilter: (i) => !(i.datasetIndex === 1 && i.dataIndex === hist.length - 1),
+      datasets: [{ label: "Actual sales", data: a, color: css("--c-actual"), width: 2 }, { label: "Forecast", data: f, color: css("--c-forecast"), width: 2.5 }] });
+    const rows = [["ForecastIQ", h.WAPE, css("--c-actual")], ["Repeat last week", b["Last week (naive)"].WAPE, css("--c-ly")],
+      ["Same week last year", b["Same week last year (seasonal naive)"].WAPE, css("--c-ly")], ["3-week average", b["3-week average"].WAPE, css("--c-ly")]];
+    const mx = Math.max(...rows.map(r => r[1]));
+    $("#acc-bars").innerHTML = rows.map(r => `<div class="b"><span>${esc(r[0])}</span><span class="t"><span class="f" style="width:${r[1] / mx * 100}%;background:${r[2]}"></span></span><b class="num">${pctPlain(r[1])}</b></div>`).join("");
+  } catch (e) {
+    $("#acc-bars").innerHTML = `<p class="hint">Live figures are unavailable right now.</p>`;
+  }
+})();
+</script>
+</body>
+</html>

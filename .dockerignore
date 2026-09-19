@@ -1,0 +1,11 @@
+__pycache__
+*.pyc
+.venv
+.git
+.env
+data
+notebooks
+legacy
+tests
+scripts
+docs

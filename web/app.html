@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ForecastIQ</title>
+  <meta name="description" content="ForecastIQ - weekly retail demand forecasting with automatic economic-indicator lookup.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/static/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/css/base.css?v=2">
+  <link rel="stylesheet" href="/static/css/app.css?v=2">
+  <script>try{var t=localStorage.getItem("fiq-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side" id="side" aria-label="Primary">
+    <a class="brand" href="/"><span class="logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18l5-6 4 3 7-9"/><path d="M15 6h5v5"/></svg></span>ForecastIQ</a>
+    <nav class="nav" aria-label="Sections">
+      <div class="nav-label">WORKSPACE</div>
+      <a href="#/overview"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Overview</a>
+      <a href="#/forecast"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-9"/><path d="M15 6h6v6"/></svg>Forecast studio</a>
+      <a href="#/bulk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M4 15v4a2 2 0 002 2h12a2 2 0 002-2v-4"/></svg>Bulk forecast</a>
+      <div class="nav-label">INSIGHTS</div>
+      <a href="#/model"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3"/><path d="M5.6 5.6l2.1 2.1"/><path d="M3 12h3"/><circle cx="12" cy="13" r="7"/><path d="M12 13l3.5-3.5"/></svg>Model performance</a>
+    </nav>
+    <div class="side-foot">
+      <div class="ws-card"><div class="t">WORKSPACE</div><div class="n">Demo workspace</div><div class="d">Walmart weekly sales &middot; 45 stores</div><div class="d" id="ws-data">&nbsp;</div></div>
+      <div class="status" id="status" style="color:#c7cbe0"><span class="dot"></span>Connecting&hellip;</div>
+      <div class="side-links"><button id="theme-btn" type="button">Dark mode</button><a href="/docs" target="_blank" rel="noopener">API docs</a></div>
+    </div>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <button class="btn btn-sm menu-btn" id="menu-btn" type="button" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <div class="crumb" id="crumb">Demo workspace</div>
+      <div class="spacer"></div>
+      <a class="btn btn-sm" href="/">Website</a>
+    </header>
+    <main class="content" id="view" tabindex="-1"><div class="card"><div class="skeleton" style="height:200px"></div></div></main>
+  </div>
+</div>
+<script src="/static/vendor/chart.umd.min.js"></script>
+<script src="/static/js/core.js?v=2"></script>
+<script src="/static/js/views.js?v=2"></script>
+<script src="/static/js/main.js?v=2"></script>
+</body>
+</html>

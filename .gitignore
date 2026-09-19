@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.pytest_cache/
+.DS_Store
+# Raw Kaggle files: only needed for retraining (see README). Keep them out of the Space repo.
+data/raw/*.csv
+# old prototype, superseded by the web app
+legacy/
+
+# Local extras
+Claude outputs/
+.w_test
+*.zip
+.streamlit/

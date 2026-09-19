@@ -1,0 +1,547 @@
+{
+  "model_name": "ForecastIQ XGBoost",
+  "version": "2.0.0",
+  "trained_at": "2026-09-19 10:28 UTC",
+  "algorithm": "XGBoost gradient-boosted trees (point + 10/90 % quantile models)",
+  "feature_count": 31,
+  "features": [
+    "IsHoliday",
+    "Temperature",
+    "Fuel_Price",
+    "CPI",
+    "Unemployment",
+    "Size",
+    "StoreType_A",
+    "StoreType_B",
+    "StoreType_C",
+    "MarkDown1",
+    "MarkDown2",
+    "MarkDown3",
+    "MarkDown4",
+    "MarkDown5",
+    "Total_MarkDown",
+    "Week_sin",
+    "Week_cos",
+    "Month_sin",
+    "Month_cos",
+    "Weekly_Sales_Lag1",
+    "Weekly_Sales_Lag2",
+    "Weekly_Sales_MA3",
+    "Weekly_Sales_STD3",
+    "IsHoliday_PrevWeek",
+    "IsHoliday_NextWeek",
+    "Rel_Fuel_Price",
+    "Store_Avg_Sales",
+    "Dept_Avg_Sales",
+    "Weekly_Sales_Lag52",
+    "Seasonal_Ratio",
+    "Seasonal_Naive_Forecast"
+  ],
+  "best_parameters": {
+    "learning_rate": 0.05,
+    "max_depth": 8,
+    "n_estimators": 600
+  },
+  "data": {
+    "rows": 421570,
+    "series": 3331,
+    "stores": 45,
+    "departments": 81,
+    "first_week": "2010-02-05",
+    "last_actual_week": "2012-10-26",
+    "indicator_last_week": "2013-07-26"
+  },
+  "validation": {
+    "holdout_window": "2012-01-01 to 2012-10-26",
+    "fit_window": "2010-02-05 to 2011-12-30",
+    "design": "Chronological hold-out. Every lag feature uses only earlier weeks; store/department averages and all model fitting use the fit window only.",
+    "holdout": {
+      "MAE": 1354.7420506378505,
+      "RMSE": 3071.9468332921583,
+      "R2": 0.9809722471776783,
+      "WAPE": 8.402777777615752,
+      "Bias_pct": 0.12871573481420379,
+      "rows": 124024
+    },
+    "baselines": {
+      "Last week (naive)": {
+        "MAE": 1759.357688108753,
+        "RMSE": 3992.9669753198646,
+        "R2": 0.9678521785429259,
+        "WAPE": 10.912403344649393,
+        "Bias_pct": -0.028129134395989113,
+        "rows": 124024
+      },
+      "Same week last year (seasonal naive)": {
+        "MAE": 1809.3874366251694,
+        "RMSE": 3833.598338393556,
+        "R2": 0.9703671565007426,
+        "WAPE": 11.222712498229969,
+        "Bias_pct": 2.476850825779078,
+        "rows": 124024
+      },
+      "3-week average": {
+        "MAE": 1962.5170507052399,
+        "RMSE": 4845.798605987458,
+        "R2": 0.9526531781413513,
+        "WAPE": 12.172497822809708,
+        "Bias_pct": -1.3203971787579951,
+        "rows": 124024
+      },
+      "Department average": {
+        "MAE": 8516.420880284442,
+        "RMSE": 14542.854658963204,
+        "R2": 0.5735585231538874,
+        "WAPE": 52.82303895710899,
+        "Bias_pct": -1.9765338083275197,
+        "rows": 124024
+      }
+    },
+    "peak_season_backtest": {
+      "window": "2011-11-01 to 2012-01-31",
+      "model": {
+        "MAE": 2039.5275199814785,
+        "RMSE": 5963.305444274689,
+        "R2": 0.9486931391459995,
+        "WAPE": 11.54407631218161,
+        "Bias_pct": -1.2770864084444955,
+        "rows": 37742
+      },
+      "last_week_naive": {
+        "MAE": 4089.9476164485186,
+        "RMSE": 14165.066092076977,
+        "R2": 0.7105066815300205,
+        "WAPE": 23.149806479461358,
+        "Bias_pct": -0.9086386842596886,
+        "rows": 37742
+      },
+      "seasonal_naive": {
+        "MAE": 2103.6963422712097,
+        "RMSE": 4744.866718072261,
+        "R2": 0.9675175057939833,
+        "WAPE": 11.90728287552438,
+        "Bias_pct": 1.70669496007314,
+        "rows": 37742
+      }
+    },
+    "interval": {
+      "nominal_coverage": 80.0,
+      "raw_quantile_coverage_pct": 75.59139784946237,
+      "calibrated_coverage_pct_out_of_sample": 85.09487666034155,
+      "calibration_adjust": 0.08941167450468496
+    },
+    "by_store_type": {
+      "A": 8.013403394742493,
+      "B": 9.626884177105765,
+      "C": 6.685499186097976
+    },
+    "by_month": [
+      {
+        "month": "Jan 2012",
+        "WAPE": 8.77005145592801,
+        "rows": 11594
+      },
+      {
+        "month": "Feb 2012",
+        "WAPE": 8.799935841094303,
+        "rows": 11585
+      },
+      {
+        "month": "Mar 2012",
+        "WAPE": 7.817161286687792,
+        "rows": 14485
+      },
+      {
+        "month": "Apr 2012",
+        "WAPE": 12.450521086011566,
+        "rows": 11602
+      },
+      {
+        "month": "May 2012",
+        "WAPE": 8.044729771708392,
+        "rows": 11518
+      },
+      {
+        "month": "Jun 2012",
+        "WAPE": 7.7784062744167475,
+        "rows": 14296
+      },
+      {
+        "month": "Jul 2012",
+        "WAPE": 7.323052405817536,
+        "rows": 11452
+      },
+      {
+        "month": "Aug 2012",
+        "WAPE": 7.806266955283195,
+        "rows": 14366
+      },
+      {
+        "month": "Sep 2012",
+        "WAPE": 7.572633188923185,
+        "rows": 11535
+      },
+      {
+        "month": "Oct 2012",
+        "WAPE": 8.099087734158944,
+        "rows": 11591
+      }
+    ],
+    "holiday_vs_regular": {
+      "holiday_weeks": 9.037613247664128,
+      "regular_weeks": 8.36996279626351
+    },
+    "top_departments": [
+      {
+        "dept": 92,
+        "WAPE": 5.7316306639883186,
+        "sales": 151629440.98000002
+      },
+      {
+        "dept": 95,
+        "WAPE": 4.817097902796642,
+        "sales": 137891790.0
+      },
+      {
+        "dept": 38,
+        "WAPE": 9.628174232462632,
+        "sales": 121001575.87
+      },
+      {
+        "dept": 90,
+        "WAPE": 4.616755332568804,
+        "sales": 89715358.35
+      },
+      {
+        "dept": 40,
+        "WAPE": 4.190622945849012,
+        "sales": 89199337.0
+      },
+      {
+        "dept": 2,
+        "WAPE": 4.301009282559674,
+        "sales": 85052985.88000001
+      },
+      {
+        "dept": 72,
+        "WAPE": 12.727895888749796,
+        "sales": 80308864.57
+      },
+      {
+        "dept": 91,
+        "WAPE": 5.413907585051858,
+        "sales": 66488166.769999996
+      },
+      {
+        "dept": 13,
+        "WAPE": 4.607806043810883,
+        "sales": 59510812.89
+      },
+      {
+        "dept": 8,
+        "WAPE": 4.165166327517333,
+        "sales": 58876083.760000005
+      }
+    ],
+    "backtest_weekly_totals": [
+      {
+        "date": "2012-01-06",
+        "actual": 44950977.15,
+        "forecast": 45915872.0
+      },
+      {
+        "date": "2012-01-13",
+        "actual": 42015371.47,
+        "forecast": 42163268.0
+      },
+      {
+        "date": "2012-01-20",
+        "actual": 42075225.16,
+        "forecast": 42060708.0
+      },
+      {
+        "date": "2012-01-27",
+        "actual": 39826926.62,
+        "forecast": 40921204.0
+      },
+      {
+        "date": "2012-02-03",
+        "actual": 46063726.77,
+        "forecast": 44955964.0
+      },
+      {
+        "date": "2012-02-10",
+        "actual": 49960617.53,
+        "forecast": 46835776.0
+      },
+      {
+        "date": "2012-02-17",
+        "actual": 50140978.95,
+        "forecast": 49126148.0
+      },
+      {
+        "date": "2012-02-24",
+        "actual": 45765800.32,
+        "forecast": 46464176.0
+      },
+      {
+        "date": "2012-03-02",
+        "actual": 46853424.58,
+        "forecast": 47647680.0
+      },
+      {
+        "date": "2012-03-09",
+        "actual": 47472482.45,
+        "forecast": 46600372.0
+      },
+      {
+        "date": "2012-03-16",
+        "actual": 46890107.77,
+        "forecast": 46377608.0
+      },
+      {
+        "date": "2012-03-23",
+        "actual": 44989539.68,
+        "forecast": 45355208.0
+      },
+      {
+        "date": "2012-03-30",
+        "actual": 45266991.3,
+        "forecast": 44803856.0
+      },
+      {
+        "date": "2012-04-06",
+        "actual": 53491356.55,
+        "forecast": 46605868.0
+      },
+      {
+        "date": "2012-04-13",
+        "actual": 46623035.95,
+        "forecast": 48660548.0
+      },
+      {
+        "date": "2012-04-20",
+        "actual": 45069693.33,
+        "forecast": 49410388.0
+      },
+      {
+        "date": "2012-04-27",
+        "actual": 43712427.74,
+        "forecast": 42860444.0
+      },
+      {
+        "date": "2012-05-04",
+        "actual": 47115526.96,
+        "forecast": 46565340.0
+      },
+      {
+        "date": "2012-05-11",
+        "actual": 46916203.35,
+        "forecast": 46077056.0
+      },
+      {
+        "date": "2012-05-18",
+        "actual": 46799554.34,
+        "forecast": 45336204.0
+      },
+      {
+        "date": "2012-05-25",
+        "actual": 47881002.76,
+        "forecast": 46543576.0
+      },
+      {
+        "date": "2012-06-01",
+        "actual": 48270553.27,
+        "forecast": 50122932.0
+      },
+      {
+        "date": "2012-06-08",
+        "actual": 49634941.04,
+        "forecast": 48043496.0
+      },
+      {
+        "date": "2012-06-15",
+        "actual": 48396447.57,
+        "forecast": 48533064.0
+      },
+      {
+        "date": "2012-06-22",
+        "actual": 47658681.27,
+        "forecast": 47137160.0
+      },
+      {
+        "date": "2012-06-29",
+        "actual": 46586927.51,
+        "forecast": 48946108.0
+      },
+      {
+        "date": "2012-07-06",
+        "actual": 51241704.8,
+        "forecast": 48064528.0
+      },
+      {
+        "date": "2012-07-13",
+        "actual": 46092016.13,
+        "forecast": 47454540.0
+      },
+      {
+        "date": "2012-07-20",
+        "actual": 46052425.99,
+        "forecast": 45981564.0
+      },
+      {
+        "date": "2012-07-27",
+        "actual": 44090330.08,
+        "forecast": 44790828.0
+      },
+      {
+        "date": "2012-08-03",
+        "actual": 47477227.83,
+        "forecast": 48880664.0
+      },
+      {
+        "date": "2012-08-10",
+        "actual": 47393433.25,
+        "forecast": 46598412.0
+      },
+      {
+        "date": "2012-08-17",
+        "actual": 47350080.57,
+        "forecast": 47586928.0
+      },
+      {
+        "date": "2012-08-24",
+        "actual": 47443293.4,
+        "forecast": 48505996.0
+      },
+      {
+        "date": "2012-08-31",
+        "actual": 47150082.96,
+        "forecast": 45208580.0
+      },
+      {
+        "date": "2012-09-07",
+        "actual": 48318503.5,
+        "forecast": 48435872.0
+      },
+      {
+        "date": "2012-09-14",
+        "actual": 44209603.02,
+        "forecast": 44846920.0
+      },
+      {
+        "date": "2012-09-21",
+        "actual": 44309074.0,
+        "forecast": 43940136.0
+      },
+      {
+        "date": "2012-09-28",
+        "actual": 43709451.56,
+        "forecast": 43489416.0
+      },
+      {
+        "date": "2012-10-05",
+        "actual": 47544273.48,
+        "forecast": 49109524.0
+      },
+      {
+        "date": "2012-10-12",
+        "actual": 46109200.12,
+        "forecast": 45856052.0
+      },
+      {
+        "date": "2012-10-19",
+        "actual": 45115318.46,
+        "forecast": 47410012.0
+      },
+      {
+        "date": "2012-10-26",
+        "actual": 45537082.67,
+        "forecast": 46767848.0
+      }
+    ]
+  },
+  "feature_importance": [
+    {
+      "feature": "Weekly_Sales_Lag1",
+      "label": "Last week's sales",
+      "importance": 0.6184846932378221
+    },
+    {
+      "feature": "Weekly_Sales_MA3",
+      "label": "3-week average sales",
+      "importance": 0.296949438735067
+    },
+    {
+      "feature": "Weekly_Sales_Lag2",
+      "label": "Sales two weeks ago",
+      "importance": 0.01735686490515242
+    },
+    {
+      "feature": "Weekly_Sales_Lag52",
+      "label": "Same week last year",
+      "importance": 0.01229995521324963
+    },
+    {
+      "feature": "Seasonal_Naive_Forecast",
+      "label": "Seasonally-adjusted run-rate",
+      "importance": 0.00975103097874118
+    },
+    {
+      "feature": "Week_cos",
+      "label": "Seasonality (week of year, phase)",
+      "importance": 0.008778927149976792
+    },
+    {
+      "feature": "Seasonal_Ratio",
+      "label": "Last year's seasonal lift",
+      "importance": 0.006120295252155295
+    },
+    {
+      "feature": "Dept_Avg_Sales",
+      "label": "Department average sales",
+      "importance": 0.006084469698613051
+    },
+    {
+      "feature": "Weekly_Sales_STD3",
+      "label": "3-week sales volatility",
+      "importance": 0.004249375910692201
+    },
+    {
+      "feature": "Week_sin",
+      "label": "Seasonality (week of year)",
+      "importance": 0.003317868450223282
+    },
+    {
+      "feature": "IsHoliday",
+      "label": "Holiday week",
+      "importance": 0.00233233981326253
+    },
+    {
+      "feature": "Rel_Fuel_Price",
+      "label": "Fuel price vs store norm",
+      "importance": 0.002281076845184912
+    },
+    {
+      "feature": "Fuel_Price",
+      "label": "Fuel price",
+      "importance": 0.0016828955116300814
+    },
+    {
+      "feature": "Temperature",
+      "label": "Temperature",
+      "importance": 0.0014540303430532944
+    },
+    {
+      "feature": "Unemployment",
+      "label": "Unemployment rate",
+      "importance": 0.0012871559849483504
+    }
+  ],
+  "interval_adjust": 0.08941167450468496,
+  "notes": [
+    "Metrics are out-of-sample one-step-ahead forecasts: each week is predicted from the actual sales of the previous weeks.",
+    "Multi-week forecasts are recursive (predictions are fed back as lags), so error grows with horizon.",
+    "The research notebook's R2 0.998 / MAE 335 came from a 3-week rolling mean that included the week being predicted (target leakage) and is NOT reproducible on a leak-free pipeline."
+  ]
+}
